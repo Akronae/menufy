@@ -1,0 +1,31 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+
+.menufy-menu {
+    background: white;
+    border-radius: 2px;
+    border: lightgrey solid .5px;
+    padding: 5px;
+    
+    -webkit-box-shadow: 0px 1px 3px 1px rgba(0,0,0,0.20);
+    -moz-box-shadow: 0px 1px 3px 1px rgba(0,0,0,0.20);
+    box-shadow: 0px 1px 3px 1px rgba(0,0,0,0.20);
+}
+
+.menufy-action {
+    font-family: 'Roboto', sans-serif;
+    
+    padding: 6px;
+    padding-right: 40px;
+    padding-left: 20px;
+}
+
+.menufy-action:hover {
+    color: dodgerblue;
+    cursor: pointer;
+}
+
+.menufy-action::selection {
+    color: dodgerblue;
+    background: transparent;
+}
