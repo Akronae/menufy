@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="menufy.css">
+        
+        <script src="menufy.js"></script>
+    </head>
+    <body>
+        
+        <h1 style="font-family: 'Roboto', sans-serif; text-align: center" class="im-a-target"> The menu will only appear on me ! </h1>
+        
+        <script>
+            let menu = [
+                { 'meta': { 'target': 'im-a-target' } },
+                { 'label': 'Show me the code', action: () => document.getElementById('code').style.visibility = 'visible' }
+            ]
+            new ContextMenu(menu)
+        </script>
+        
+        <pre id="code" style="visibility: hidden">
+            let menu = [
+                { 'meta': { 'target': 'im-a-target' } },
+                { 'label': 'Show me the code', action: () => document.getElementById('code').style.visibility = 'visible' }
+            ]
+            new ContextMenu(menu)
+        </pre>
+    </body>
+</html>

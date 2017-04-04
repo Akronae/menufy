@@ -70,6 +70,9 @@ class ContextMenu
         
         structure.forEach( (action, index) =>
         {
+            // Avoiding interpreting meta
+            if (index == 0 && action['meta']) return
+            
             let act = document.createElement('span')
             
             // Parsing propertie into DOM attribute
