@@ -11,6 +11,7 @@ class ContextMenu
         
         this.showOnRightClick = true
         this.hideDefaultContextMenu = true
+        this.checkClasses = true
         
         // Middleware functions
         this.moveTo = ( x, y ) => {
@@ -24,13 +25,18 @@ class ContextMenu
             
             document.oncontextmenu = (e) =>
             {
+                if ( this.checkClasses && this.structure[0].meta && !e.target.classList.contains(this.structure[0].meta.target) )
+                { this.hide(); return true }
+                
                 this.x = e.clientX
                 this.y = e.clientY
-            
+
                 if (this.showOnRightClick) this.show( this.x, this.y )
                 
                 if (this.hideDefaultContextMenu) return false
             }
+            
+            document.onclick = () => this.hide()
         }
         
         window.addEventListener('load', this.init, false)
@@ -72,7 +78,7 @@ class ContextMenu
             act.classList.add('menufy-action')
             act.style.display = 'table'
             act.innerText = action.label
-            act.onclick = () => { if (action.action) action.action(); this.hide() }
+            act.onclick = action.action
             
             this.menu.appendChild(act)
         })
