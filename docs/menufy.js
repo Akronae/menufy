@@ -56,6 +56,7 @@ class ContextMenu
     
     buildDOM ( structure )
     {
+        // 666
         this.menu = document.createElement('div')
         this.menu.style.visibility = 'hidden'
         this.menu.style.position = 'absolute'
