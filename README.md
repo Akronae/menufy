@@ -8,5 +8,5 @@
 ## 3) You are ready !
 
 # API
-##`ContextMenu.show( x, y )`  
+### `ContextMenu.show( x, y )`  
 Make context menu appear at x, y position
