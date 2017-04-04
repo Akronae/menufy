@@ -57,7 +57,6 @@ class ContextMenu
         this.menu.classList.add('menufy-menu')
         
         this.outerZone = document.createElement('div')
-        this.outerZone.style.background = 'grey'
         this.outerZone.style.width = '100%'
         this.outerZone.style.height = '100%'
         this.outerZone.style.position = 'fixed'
@@ -73,7 +72,7 @@ class ContextMenu
             act.classList.add('menufy-action')
             act.style.display = 'table'
             act.innerText = action.label
-            act.onclick = action.action
+            act.onclick = () => { if (action.action) action.action(); this.hide() }
             
             this.menu.appendChild(act)
         })

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="menufy.css">
+        
+        <script src="menufy.js"></script>
+    </head>
+    <body>
+    
+        <script>
+            let menu = [
+                { 'label': 'Show me future', action: () => document.getElementsByTagName('body')[0].style.background = 'url(https://s3-us-west-2.amazonaws.com/koober/admin/blog/Les-12-livres-pr%C3%A9f%C3%A9r%C3%A9s-d%27Elon-Musk-57cd7f2477c2a.jpg)' },
+                { 'label': 'Is this menu great ?', action: () => alert('For sure !') }
+            ]
+            new ContextMenu(menu)
+        </script>
+    
+    </body>
+</html>
