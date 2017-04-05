@@ -64,7 +64,8 @@ class Menufy
 
         }
         
-        window.addEventListener('load', this.init, false)
+        if (document.readyState === 'complete') this.init()
+        else window.addEventListener('load', this.init, false)
     }
     
     show ( x, y )
