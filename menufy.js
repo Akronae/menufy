@@ -1,5 +1,117 @@
-var Menufy=function(c,e){var a=this;this.structure=c;this.menu=null;this.y=this.x=0;this.checkClasses=this.hideDefaultContextMenu=!0;this.trigger=void 0===e?"right":e;this.moveTo=function(b,d){a.menu.style.left=b+"px";a.menu.style.top=d+"px"};this.init=function(){a.buildDOM(a.structure);"left"==a.trigger?(document.addEventListener("click",function(b){if(b.target.classList.contains("menufy-action"))return a.hide();if(a.checkClasses&&a.structure[0].meta&&!b.target.classList.contains(a.structure[0].meta.target))return a.hide(),
-!0;a.x=b.clientX;a.y=b.clientY;a.show(a.x,a.y);if(a.hideDefaultContextMenu)return!1}),document.oncontextmenu=function(){return a.hide()}):"right"==a.trigger&&(document.oncontextmenu=function(b){if(a.checkClasses&&a.structure[0].meta&&!b.target.classList.contains(a.structure[0].meta.target))return a.hide(),!0;a.x=b.clientX;a.y=b.clientY;a.show(a.x,a.y);if(a.hideDefaultContextMenu)return!1},document.onclick=function(){return a.hide()})};window.addEventListener("load",this.init,!1)};
-Menufy.prototype.show=function(c,e){this.moveTo(c,e);this.menu.style.visibility="visible"};Menufy.prototype.hide=function(){this.menu.style.visibility="hidden"};
-Menufy.prototype.buildDOM=function(c){var e=this;this.menu=document.createElement("div");this.menu.style.visibility="hidden";this.menu.style.position="absolute";this.menu.style.zIndex=100;this.menu.classList.add("menufy-menu");this.outerZone=document.createElement("div");this.outerZone.style.width="100%";this.outerZone.style.height="100%";this.outerZone.style.position="fixed";this.outerZone.onclick=function(){return e.hide()};c.forEach(function(a,b){if(0!=b||!a.meta){var d=document.createElement("span"),
-c;for(c in a)"action"!=c&&d.setAttribute(c,a[c]);d.classList.add("menufy-action");d.style.display="table";d.innerText=a.label;a.action&&(d.onclick=function(){setTimeout(function(){return a.action()},10)});e.menu.appendChild(d)}});document.getElementsByTagName("body")[0].appendChild(this.menu);document.getElementsByTagName("body")[0].appendChild(this.outerZone)};
+'use strict'
+
+class Menufy
+{
+    constructor ( structure, trigger = 'right' )
+    {
+        this.structure = structure
+        this.menu = null
+        this.x = 0
+        this.y = 0
+        
+        this.hideDefaultContextMenu = true
+        this.checkClasses = true
+        this.trigger = trigger
+        
+        // Middleware functions
+        this.moveTo = ( x, y ) => {
+            this.menu.style.left = x + 'px'
+            this.menu.style.top = y + 'px'
+        }
+        
+        this.init = () =>
+        {
+            this.buildDOM( this.structure )
+
+            if (this.trigger == 'left')
+            {
+                document.addEventListener('click',  (e) => {
+                    // If a row was clciked, close.
+                    if (e.target.classList.contains('menufy-action')) return this.hide()
+                    
+                    if ( this.checkClasses && this.structure[0].meta && !e.target.classList.contains(this.structure[0].meta.target) )
+                    { this.hide(); return true }
+    
+                    
+                    this.x = e.clientX
+                    this.y = e.clientY
+
+                    this.show( this.x, this.y )
+                    
+                    if (this.hideDefaultContextMenu) return false
+                } )
+                
+                document.oncontextmenu = () => this.hide()
+            }
+            else if (this.trigger == 'right')
+            {
+                document.oncontextmenu = (e) =>
+                {
+                    if ( this.checkClasses && this.structure[0].meta && !e.target.classList.contains(this.structure[0].meta.target) )
+                    { this.hide(); return true }
+    
+                    
+                    this.x = e.clientX
+                    this.y = e.clientY
+
+                    this.show( this.x, this.y )
+                    
+                    if (this.hideDefaultContextMenu) return false
+                }
+                
+                document.onclick = () => this.hide()
+            }   
+
+        }
+        
+        window.addEventListener('load', this.init, false)
+    }
+    
+    show ( x, y )
+    {
+        this.moveTo(x, y)
+        this.menu.style.visibility = 'visible'
+    }
+    
+    hide ()
+    {
+        this.menu.style.visibility = 'hidden'
+    }
+    
+    
+    buildDOM ( structure )
+    {
+        this.menu = document.createElement('div')
+        this.menu.style.visibility = 'hidden'
+        this.menu.style.position = 'absolute'
+        this.menu.style.zIndex = 100
+        this.menu.classList.add('menufy-menu')
+        
+        this.outerZone = document.createElement('div')
+        this.outerZone.style.width = '100%'
+        this.outerZone.style.height = '100%'
+        this.outerZone.style.position = 'fixed'
+        this.outerZone.onclick = () => this.hide()
+        
+        structure.forEach( (action, index) =>
+        {
+            // Avoiding interpreting meta
+            if (index == 0 && action['meta']) return
+            
+            let act = document.createElement('span')
+            
+            // Parsing propertie into DOM attribute
+            for ( let attr in action ) { if (attr != 'action') act.setAttribute(attr, action[attr]) }
+            
+            act.classList.add('menufy-action')
+            act.style.display = 'table'
+            act.innerText = action.label
+            if (action.action) act.onclick = () => { setTimeout( () => action.action(), 10 ) }
+            
+            this.menu.appendChild(act)
+        })
+        
+        document.getElementsByTagName('body')[0].appendChild(this.menu)
+        document.getElementsByTagName('body')[0].appendChild(this.outerZone)
+    }
+}
