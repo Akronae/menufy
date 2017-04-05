@@ -20,8 +20,8 @@ let contextMenu = new ContextMenu( menu, 'right' )
 ```   
 The `menu.meta` tells menufy to show up only when clicking on a element containing `a-class` class.  
 `label` define a menu's line, `action` define a callback on click.  
-`right` (could be `left` or `none`) define on wich mouse event the menu should be shown.
-For tutorials, see the "demo" page.
+`right` (could be `left` or `none`) define on wich mouse event the menu should be shown.  
+For demo, see the "demo" page.
 ## Methods
 ### `ContextMenu.show( x, y )`  
 Make context menu appear at x, y position.
