@@ -10,10 +10,10 @@
 # API
 ## Sample
 ### Initialising `ContextMenu`
-```
+``` javascript
 let menu = [
   { meta: { target: 'a-class' } },
-  { label: 'I\'m just a label ! },
+  { label: 'I\'m just a label !' },
   { label: 'ALEERT!', action: () => alert('RIING!') }
 ]
 let contextMenu = new ContextMenu( menu, 'right' )
