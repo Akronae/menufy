@@ -16,7 +16,7 @@ let menu = [
   { label: 'I\'m just a label !' },
   { label: 'ALEERT!', action: () => alert('RIING!') }
 ]
-let contextMenu = new ContextMenu( menu, 'right' )
+let contextMenu = new Menufy( menu, 'right' )
 ```   
 The `menu.meta` tells menufy to show up only when clicking on a element containing `a-class` class.  
 `label` define a menu's line, `action` define a callback on click.  
