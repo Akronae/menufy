@@ -33,8 +33,13 @@ class Menufy
                     { this.hide(); return true }
     
                     
+<<<<<<< HEAD
                     this.x = e.pageX
                     this.y = e.pageY
+=======
+                    this.x = e.clientX
+                    this.y = e.clientY
+>>>>>>> 01bf0caa1b75c605873c65bfa7e8857df33a96a7
 
                     this.show( this.x, this.y )
                     
@@ -51,8 +56,13 @@ class Menufy
                     { this.hide(); return true }
     
                     
+<<<<<<< HEAD
                     this.x = e.pageX
                     this.y = e.pageY
+=======
+                    this.x = e.clientX
+                    this.y = e.clientY
+>>>>>>> 01bf0caa1b75c605873c65bfa7e8857df33a96a7
 
                     this.show( this.x, this.y )
                     
@@ -115,4 +125,8 @@ class Menufy
         document.getElementsByTagName('body')[0].appendChild(this.menu)
         document.getElementsByTagName('body')[0].appendChild(this.outerZone)
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 01bf0caa1b75c605873c65bfa7e8857df33a96a7
