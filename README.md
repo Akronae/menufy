@@ -1,4 +1,4 @@
-> The easy way to build contextual menusmen
+> The easy way to build contextual menus
 
 # Demo <https://akronae.github.io/menufy/>
 
