@@ -10,14 +10,14 @@
 # API
 ## Sample
 ### Initialising `ContextMenu`
-`
+```
 let menu = [
   { meta: { target: 'a-class' } },
   { label: 'I\'m just a label ! },
   { label: 'ALEERT!', action: () => alert('RIING!') }
 ]
 let contextMenu = new ContextMenu( menu, 'right' )
-`  
+```   
 The `menu.meta` tells menufy to show up only when clicking on a element containing `a-class` class.  
 `label` define a menu's line, `action` define a callback on click.  
 `right` (could be `left` or `none`) define on wich mouse event the menu should be shown.
