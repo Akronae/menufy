@@ -1,17 +1,17 @@
 'use strict'
 
-class ContextMenu
+class Menufy
 {
-    constructor ( structure )
+    constructor ( structure, trigger = 'right' )
     {
         this.structure = structure
         this.menu = null
         this.x = 0
         this.y = 0
         
-        this.showOnRightClick = true
         this.hideDefaultContextMenu = true
         this.checkClasses = true
+        this.trigger = trigger
         
         // Middleware functions
         this.moveTo = ( x, y ) => {
@@ -22,21 +22,46 @@ class ContextMenu
         this.init = () =>
         {
             this.buildDOM( this.structure )
-            
-            document.oncontextmenu = (e) =>
-            {
-                if ( this.checkClasses && this.structure[0].meta && !e.target.classList.contains(this.structure[0].meta.target) )
-                { this.hide(); return true }
-                
-                this.x = e.clientX
-                this.y = e.clientY
 
-                if (this.showOnRightClick) this.show( this.x, this.y )
+            if (this.trigger == 'left')
+            {
+                document.addEventListener('click',  (e) => {
+                    // If a row was clciked, close.
+                    if (e.target.classList.contains('menufy-action')) return this.hide()
+                    
+                    if ( this.checkClasses && this.structure[0].meta && !e.target.classList.contains(this.structure[0].meta.target) )
+                    { this.hide(); return true }
+    
+                    
+                    this.x = e.clientX
+                    this.y = e.clientY
+
+                    this.show( this.x, this.y )
+                    
+                    if (this.hideDefaultContextMenu) return false
+                } )
                 
-                if (this.hideDefaultContextMenu) return false
+                document.oncontextmenu = () => this.hide()
             }
-            
-            document.onclick = () => this.hide()
+            else if (this.trigger == 'right')
+            {
+                document.oncontextmenu = (e) =>
+                {
+                    if ( this.checkClasses && this.structure[0].meta && !e.target.classList.contains(this.structure[0].meta.target) )
+                    { this.hide(); return true }
+    
+                    
+                    this.x = e.clientX
+                    this.y = e.clientY
+
+                    this.show( this.x, this.y )
+                    
+                    if (this.hideDefaultContextMenu) return false
+                }
+                
+                document.onclick = () => this.hide()
+            }   
+
         }
         
         window.addEventListener('load', this.init, false)
@@ -56,7 +81,6 @@ class ContextMenu
     
     buildDOM ( structure )
     {
-        // 666
         this.menu = document.createElement('div')
         this.menu.style.visibility = 'hidden'
         this.menu.style.position = 'absolute'
@@ -82,7 +106,7 @@ class ContextMenu
             act.classList.add('menufy-action')
             act.style.display = 'table'
             act.innerText = action.label
-            act.onclick = action.action
+            if (action.action) act.onclick = () => { setTimeout( () => action.action(), 10 ) }
             
             this.menu.appendChild(act)
         })

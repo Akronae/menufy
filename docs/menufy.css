@@ -26,6 +26,6 @@
 }
 
 .menufy-action::selection {
-    color: dodgerblue;
+    color: black;
     background: transparent;
 }
