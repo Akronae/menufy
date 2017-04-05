@@ -3,7 +3,7 @@
 # Demo <https://akronae.github.io/menufy/>
 
 # Installation
-## 1) Download `menufy.js` & `menufy.css`.
+## 1) Download `menufy(.min).js` & `menufy(.min).css`.
 ## 2) Include these files.
 ## 3) You are ready !
 
